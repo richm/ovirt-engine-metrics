@@ -1,9 +1,28 @@
 ---
+- name: Configure RHLOG repo
+  copy:
+    src: rhlog.repo
+    dest: /etc/yum.repos.d/rhlog.repo
+  when: use_rhlog_repo|default(false)
+
 - name: Install fluentd engine plugins
   yum:
     name: '{{ item }}'
     state: latest
   with_items:
     - '{{ fluentd_engine_plugin_packages }}'
-  when: manage_packages|default(false)
+  when:
+  - manage_packages|default(false)
+  - not fluentd_use_elasticsearch
+  notify: restart fluentd
+
+- name: Install fluentd engine plugins including for elasticsearch
+  yum:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - '{{ fluentd_engine_plugin_elasticsearch_packages }}'
+  when:
+  - manage_packages|default(false)
+  - fluentd_use_elasticsearch
   notify: restart fluentd

@@ -35,3 +35,28 @@ fluentd_ca_cert_path: '{{ fluentd_config_dir }}/ca_cert.pem'
 # Content of an x509 certificate that will be used to identify the
 # server to clients.
 fluentd_ca_cert:
+
+# Fluentd should send records directly to Elasticsearch
+fluentd_use_elasticsearch: false
+
+# Where to find the Fluentd Elasticsearch certificate authority certificate.
+fluentd_elasticsearch_ca_file: '{{ fluentd_config_dir }}/elasticsearch_ca_cert.pem'
+
+# Content of an x509 Fluentd Elasticsearch CA certificate that will be used to identify the
+# server to clients.
+fluentd_elasticsearch_ca_file_contents:
+
+# Where to find the Fluentd Elasticsearch client certificate.
+fluentd_elasticsearch_client_cert: '{{ fluentd_config_dir }}/elasticsearch_client_cert.pem'
+
+# Content of an x509 Fluentd Elasticsearch client certificate that will be used to
+# authenicate to Elasticsearch.
+fluentd_elasticsearch_client_cert_contents:
+
+# Where to find the Fluentd Elasticsearch client key.
+fluentd_elasticsearch_client_key: '{{ fluentd_config_dir }}/elasticsearch_client_key.pem'
+
+# Content of an x509 Fluentd Elasticsearch client key that will be used to
+# authenicate to Elasticsearch.
+fluentd_elasticsearch_client_key_contents:
+
